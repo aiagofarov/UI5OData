@@ -3,7 +3,16 @@
 	<App>
 		<pages>
 			<Page title="{i18n>title}">
-				<content></content>
+				<content>
+					<List items="{sapdevcenter_odata>/SalesOrderSet}">
+		<StandardListItem
+			title="{sapdevcenter_odata>SalesOrderID}"
+			description="{sapdevcenter_odata>Note}"
+			info = "{sapdevcenter_odata>LifecycleStatusDescription}"
+			press="handlePress"
+			detailPress="handleDetailPress" />
+					</List>
+				</content>
 			</Page>
 		</pages>
 	</App>
