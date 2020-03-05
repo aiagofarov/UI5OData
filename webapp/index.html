@@ -19,12 +19,25 @@
 
 		<script>
 			sap.ui.getCore().attachInit(function() {
-				new sap.m.Shell({
-					app: new sap.ui.core.ComponentContainer({
-						height : "100%",
-						name : "AIDemoAppsUI5OData"
-					})
-				}).placeAt("content");
+				//Read GET parameter
+				var bMock = jQuery.sap.getUriParameters().get('mock') === 'true';
+				//Collect required modules
+				var aRequire = ['sap/m/Shell', 'sap/ui/core/ComponentContainer'];
+				if(bMock) {
+					aRequire.push('AIDemoAppsUI5OData/localService/mock'); 
+				};
+				//Run!
+				sap.ui.require(aRequire, function(oShell, oComponentContainer, oMock) {
+                    if(oMock) {
+                        oMock.init();
+                    }
+                    new oShell({
+                      app: new oComponentContainer({
+                        height: '100%',
+                        name: 'AIDemoAppsUI5OData',
+                      }),
+                    }).placeAt('content');
+				});
 			});
 		</script>
 	</head>
